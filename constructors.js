@@ -6,9 +6,21 @@ function Dog(name, color) {
   this.numLegs = 4
 }
 
-Dog.prototype.tailLength = 2; //prototype property
-let terrier = new Dog("Alnick", "Black")
+//prototype property
+Dog.prototype = {
+    constructor: Dog,
+    tailLength: 2,
+    eat: function() {
+        console.log("nom nom nom");
+    },
+    sayName: function() {
+        console.log("Arf, my name is " + this.name);
+    }
+}
+
+let terrier = new Dog("Alnick", "Black");
 let isInstanceof = terrier instanceof Dog;
+let isPrototypeof = Dog.prototype.isPrototypeOf(terrier);
 let arrOwnProps = [];
 let arrPrototypeProps = [];
 
@@ -21,8 +33,9 @@ for(props in terrier) {
     }
 }
 
-
 console.log(terrier.name);
 console.log(isInstanceof);
+console.log(isPrototypeof);
 console.log(arrOwnProps);
 console.log(arrPrototypeProps);
+console.log(terrier.sayName());
